@@ -73,7 +73,7 @@ Open `http://localhost:5173`. API documentation is available at `http://localhos
 
 ```bash
 cd vendor-simulator && mvn test
-cd ../infrastructure-manager && mvn test
+cd ../infrastructure-manager && TEST_CREDENTIAL_ENCRYPTION_KEY="$(openssl rand -base64 32)" mvn test
 cd ../dashboard && npm install && npm run build
 ```
 

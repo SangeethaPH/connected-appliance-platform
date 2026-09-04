@@ -1,0 +1,38 @@
+spring:
+  application:
+    name: connected-appliance-vendor-simulator
+  kafka:
+    bootstrap-servers: ${KAFKA_BOOTSTRAP_SERVERS:localhost:9092}
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+      acks: all
+      properties:
+        enable.idempotence: true
+        spring.json.add.type.headers: false
+
+server:
+  port: ${SERVER_PORT:8081}
+
+simulator:
+  scheduler-tick-ms: ${SIMULATOR_TICK_MS:1000}
+  kafka-publisher:
+    enabled: ${KAFKA_PUBLISHER_ENABLED:true}
+    topic: ${KAFKA_RAW_METRICS_TOPIC:appliance.metrics.raw.v1}
+
+management:
+  metrics:
+    tags:
+      application: ${spring.application.name}
+  endpoints:
+    web:
+      exposure:
+        include: health,info,prometheus
+  endpoint:
+    health:
+      show-details: always
+
+info:
+  app:
+    name: ${spring.application.name}
+    purpose: Simulates appliance vendors and emits normalized metrics

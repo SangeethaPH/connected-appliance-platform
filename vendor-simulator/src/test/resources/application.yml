@@ -1,0 +1,11 @@
+simulator:
+  scheduler-tick-ms: 60000
+  kafka-publisher:
+    enabled: false
+    topic: appliance.metrics.raw.v1
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health

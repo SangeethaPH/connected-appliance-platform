@@ -1,0 +1,37 @@
+spring:
+  datasource:
+    url: jdbc:h2:mem:appliances;MODE=PostgreSQL;DB_CLOSE_DELAY=-1
+    username: sa
+    password:
+  jpa:
+    open-in-view: false
+    hibernate:
+      ddl-auto: validate
+  flyway:
+    enabled: true
+  kafka:
+    listener:
+      auto-startup: false
+    consumer:
+      group-id: appliance-infrastructure-manager-test
+
+app:
+  security:
+    admin:
+      username: admin
+      password: test-only-password
+  credentials:
+    encryption-key: ${TEST_CREDENTIAL_ENCRYPTION_KEY}
+  kafka:
+    create-topics: false
+    topics:
+      raw-metrics: appliance.metrics.raw.v1
+      validated-metrics: appliance.metrics.validated.v1
+      quarantine: appliance.metrics.quarantine.v1
+      dead-letter: appliance.metrics.dlt.v1
+    groups:
+      ingress: appliance-ingress-validator-test
+      processor: appliance-metric-processor-test
+  reporting:
+    zone: Asia/Kolkata
+    scheduling-enabled: false

@@ -1,0 +1,10 @@
+export type Vendor = { id:string; name:string; apiStyle:string; authentication:string; metricProfile:string }
+export type SimAppliance = { id:string; vendorId:string; name:string; type:string; status:string; emissionMode:string; metricIntervalSeconds:number; lastMetricAt?:string }
+export type RawEvent = { eventId:string; vendorCode:string; externalApplianceId:string; applianceType:string; capturedAt:string; metrics:Record<string,number> }
+export type InfraVendor = { id:string; code:string; name:string; baseUrl:string; authenticationType:string; username:string; createdAt:string }
+export type Appliance = { id:string; vendorId:string; externalId:string; name:string; type:string; status:string; onboardedAt:string; lastSeenAt:string }
+export type Metric = { id:string; eventId:string; applianceId:string; metricName:string; value:number; unit:string; capturedAt:string; receivedAt:string }
+export type Aggregate = { metricName:string; unit:string; count:number; minimum:number; maximum:number; average:number }
+export type ApplianceSummary = { applianceId:string; externalApplianceId:string; applianceName:string; applianceType:string; vendorId:string; vendorCode:string; vendorName:string; metrics:Aggregate[] }
+export type DailyReport = { id:string; reportDate:string; zoneId:string; periodStart:string; periodEnd:string; generatedAt:string; totalSamples:number; appliances:ApplianceSummary[] }
+export type CustomReport = { id:string; from:string; to:string; generatedAt:string; totalSamples:number; appliances:ApplianceSummary[] }
